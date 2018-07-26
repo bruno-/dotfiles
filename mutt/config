@@ -1,0 +1,151 @@
+# vi: ft=muttrc
+# Paths ----------------------------------------------
+set folder           = ~/data/mail                            # mailbox location
+set alias_file       = ~/data/src/dotfiles/mutt/alias         # where to store aliases
+set header_cache     = ~/data/src/dotfiles/mutt/cache/headers # where to store headers
+set message_cachedir = ~/data/src/dotfiles/mutt/cache/bodies  # where to store bodies
+set certificate_file = ~/data/src/dotfiles/mutt/certificates  # where to store certs
+set mailcap_path     = ~/data/src/dotfiles/mutt/mailcap       # entries for filetypes
+set tmpdir           = ~/data/src/dotfiles/mutt/temp          # where to keep temp files
+set signature        = ~/data/src/dotfiles/mutt/sig           # my signature file
+
+# Basic Options --------------------------------------
+set wait_key = no        # shut up, mutt
+set mbox_type = Maildir  # mailbox type
+set timeout = 3          # idle time before scanning
+set mail_check = 0       # minimum time between scans
+unset move               # gmail does that
+set delete               # don't ask, just do
+unset confirmappend      # don't ask, just do!
+set quit                 # don't ask, just do!!
+unset mark_old           # read/new is good enough for me
+set pipe_decode          # strip headers and eval mimes when piping
+set thorough_search      # strip headers and eval mimes before searching
+set autoedit             # jump to message body when composing mail
+unset record             # do not record sent email
+set recall = no          # do not ask to use postponed mail
+set editor='vim -c "norm! }gwGgg"' # auto format mail when responding
+
+# Status Bar -----------------------------------------
+set status_chars  = " *%A"
+set status_format = "%> %?p?%p postponed? "
+
+# Header Options -------------------------------------
+ignore *                                        # ignore all headers
+unignore from: to: reply-to: cc: date: subject: # show only these
+unignore X-PGP-Key: User-Agent: X-Mailer: X-Date:
+unhdr_order *                           # some distros order things by default
+hdr_order from: to: reply-to: cc: date: X-Date: subject:  # and in this order
+set user_agent = no
+
+# Index View Options ---------------------------------
+set date_format = "%Y-%m-%d %H:%M"
+set index_format = " %Z | %X | %D | %-30.30L  %2M  %s"
+# docs: http://www.rdrop.com/docs/mutt/manual93.html
+set sort = threads
+set sort_aux = reverse-last-date-received
+set uncollapse_jump                        # don't collapse on an unread message
+set sort_re                                # thread based on regex
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+
+# Index Key Bindings ---------------------------------
+bind index <tab> sync-mailbox
+macro index M "<save-message>><enter>" "move a message to a mbox"
+
+# Pager View Options ---------------------------------
+set pager_index_lines = 10 # number of index lines to show
+set pager_context = 3      # number of context lines to show
+set pager_stop             # don't go to next message automatically
+set menu_scroll            # scroll in menus
+set tilde                  # show tildes like in vim
+unset markers              # no ugly plus signs
+
+unalternates '*'
+unsubscribe *
+
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+auto_view text/html        # view html automatically
+alternative_order text/plain text/enriched text/html
+set wrap = 78
+
+# Pager Key Bindings ---------------------------------
+bind pager k previous-line
+bind pager j next-line
+bind pager = top
+bind pager * bottom
+
+# View attachments properly.
+bind attach <return> view-mailcap
+
+# save attach to a particular dir
+macro attach W <save-entry><kill-line>~/Downloads/
+
+# Ctrl-u to open urlview
+macro pager \Cu "|urlview<enter>" "call urlview to open links"
+
+# Compose View Options -------------------------------
+set realname = "Bruno Sutic"         # who am i?
+set envelope_from                    # which from?
+set edit_headers                     # show headers when composing
+set fast_reply                       # skip to compose when replying
+set fcc_attach                       # save attachments with the body
+unset mime_forward                   # forward attachments as part of body
+set forward_format = "Fwd: %s"       # format of subject when forwarding
+set forward_decode                   # decode when forwarding
+set attribution = "On %d, %n wrote:" # format of quoting header
+set reply_to                         # reply to Reply to: field
+set reverse_name                     # reply as whomever it was to
+set include                          # include message in replies
+set forward_quote                    # include message in forwards
+set sendmail_wait = 0
+
+macro index a "<limit>all\n" "show all messages (undo limit)"
+folder-hook . "exec collapse-all"    # collapse all threads
+
+# working with multiple accounts
+mailboxes +bruno-brunosutic.com/inbox \
+          +bruno-lockstate.com/inbox \
+          +bruno.sutic-gmail.com/inbox \
+
+folder-hook 'bruno-brunosutic.com' 'source ~/data/src/dotfiles/mutt/muttrc'
+folder-hook 'bruno-lockstate.com' 'source ~/data/src/dotfiles/mutt/lockstate'
+folder-hook 'bruno.sutic-gmail.com' 'source ~/data/src/dotfiles/mutt/gmail'
+
+# coloring
+color hdrdefault white black          # headers white on black
+color header green  default ^From:
+color header yellow default ^Subject:
+color header brightwhite default ^X-Date:
+# color quoted cyan black               # quoted text in blue
+color signature white black
+# quote levels
+color quoted  color108 color232
+color quoted1 color116 color232
+color quoted2 color247 color232
+color quoted3 color108 color232
+color quoted4 color116 color232
+color quoted5 color247 color232
+color quoted6 color108 color232
+color quoted7 color116 color232
+color quoted8 color247 color232
+color quoted9 color108 color232
+
+# PGP messages
+color body white        black   "^gpg:.*"
+color body green        default "^gpg: Good signature .*"
+color body brightwhite  red     "^gpg: BAD signature from.*"
+# color body white        black   "^.-- PGP.*"
+# color body white        black   "^.-- The following data is signed --]"
+# color body white        black   "^.-- End of PGP output --]"
+# color body white        black   "^.-- End of signed data --]"
+
+# Encrypting email
+# set crypt_use_gpgme
+source ~/data/src/dotfiles/mutt/gpg.rc
+set pgp_use_gpg_agent = yes
+set pgp_sign_as = 2914ED81
+set pgp_timeout = 3600
+set crypt_replysign                  # sign only replies to signed messages
+set crypt_replyencrypt = yes
+set crypt_replysignencrypted = yes   # encrypt and sign replies to encrypted messages
+set crypt_verify_sig = yes           # auto verify message signature when opened

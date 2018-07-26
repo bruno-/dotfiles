@@ -1,0 +1,55 @@
+[user]
+	name = Bruno Sutic
+	email = code@brunosutic.com
+	signingkey = C46417C14F7BD54EA0827090CAFA7B1B2914ED81
+[commit]
+	gpgsign = true
+[alias]
+	ta = !sh -c "\"git tag -s $1 -m '$1'\""  # creates signed annotated tag from a single argument
+[color]
+	ui = true
+[core]
+	editor = vim
+	# -R display color in git log, -M show verbose file info, -I ignore case with search
+	# -X ?, -S chop long horiz lines
+	pager = less -XRMI
+	# detect whitespace faults and raise errors
+	whitespace = trailing-space,space-before-tab
+[apply]
+	# strip whitespace errors, but only during patch, not always automatically
+	whitespace = fix
+[merge]
+	tool = vimdiff
+[mergetool]
+	keepBackup = false
+[help]
+	autocorrect = 1     # corrects typos: git stuts -> status
+[diff "word"]
+	textconv = strings  # uses strings when diffing word files
+# proxy for company laptop
+[include]
+	path = .gitconfig_proxy
+[diff]
+	tool = vimdiff
+[github]
+	user = bruno-
+[push]
+	default = simple
+[rerere]
+	enabled = true
+[init]
+	templatedir = ~/.config/git/template/
+[grep]
+	lineNumber = true
+[merge "railsschema"]
+	name = newer Rails schema version
+	driver = "ruby -e '\n\
+		system %(git), %(merge-file), %(--marker-size=%L), %(%A), %(%O), %(%B)\n\
+		b = File.read(%(%A))\n\
+		b.sub!(/^<+ .*\\nActiveRecord::Schema\\.define.version: (\\d+). do\\n=+\\nActiveRecord::Schema\\.define.version: (\\d+). do\\n>+ .*/) do\n\
+			%(ActiveRecord::Schema.define(version: #{[$1, $2].max}) do)\n\
+		end\n\
+		File.open(%(%A), %(w)) {|f| f.write(b)}\n\
+		exit 1 if b.include?(%(<)*%L)'"
+[tag]
+	sort = version:refname

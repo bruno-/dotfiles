@@ -1,0 +1,16 @@
+confirmation=off
+data.location=~/data/var/task
+weekstart=Monday
+# detection=off
+# defaultwidth=80
+# defaultheight=0
+
+# report.next.filter=project: +READY
+alias.n=project: +READY -work
+alias.nn=project: +READY -work (+next or +ACTIVE)
+alias.work=+work -acs -question
+alias.standup=+work end.after:today-1day completed
+alias.monstandup=+work end.after:today-3day completed
+uda.priority.values=H,M,,L
+urgency.uda.priority..coefficient=1.8
+urgency.uda.priority.L.coefficient=0

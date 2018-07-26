@@ -1,0 +1,25 @@
+# routes incoming mail to appropriate mailboxes
+PATH=/usr/bin:/usr/local/bin
+MAILDIR=$HOME/data/mail/bruno-brunosutic.com/
+DEFAULT=$HOME/data/mail/bruno-brunosutic.com/inbox/
+LOGFILE=/dev/null
+SHELL=/bin/sh
+
+:0fw
+| $HOME/data/bin/mail-date-header
+
+:0:
+* ^(To|Cc|CC).*(stackoverflow)@brunosutic.com
+archive/
+
+:0:
+* ^X-getmail-retrieved-from-mailbox: Sent
+archive/
+
+:0:
+* ^X-getmail-retrieved-from-mailbox: Archive
+archive/
+
+:0:
+* ^(To|Cc|CC).*(toastmasters|dkim)@brunosutic.com
+archive/

@@ -1,0 +1,8 @@
+set editing-mode emacs
+
+$if mode=emacs
+  # Much better Ctrl-W ... EVERYWHERE
+  # also requires having the below in .bashrc
+  # stty werase undef
+  C-w: backward-kill-word
+$endif

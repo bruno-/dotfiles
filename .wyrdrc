@@ -1,0 +1,43 @@
+# include default config
+include "/usr/local/etc/wyrdrc"
+
+# Cheat when editing: Edit the source file in src/.
+# set edit_old_command = "wyrd-edit \"%file%\" \"%line%\""
+# set edit_new_command = "wyrd-edit \"%file%\" \"\""
+# set edit_any_command = "wyrd-edit \"%file%\" \"\""
+
+set week_starts_monday = "true"
+set schedule_12_hour = "false"
+set selection_12_hour = "false"
+set status_12_hour = "false"
+set description_12_hour = "false"
+set quick_date_US = "false"
+set reminders_file = "$HOME/data/var/reminders/"
+
+# And I like my reminders in that format:
+set timed_template = "REM %monname% %mday% %year% AT %hour%:%min% DURATION 0:30 MSG "
+# set untimed_template = "REM %year% %monname% %mday% MSG "
+
+# Count busy hours instead of number of reminders.
+# set busy_algorithm = "2"
+
+# Center cursor and follow time if "home" is pressed.
+set center_cursor = "true"
+set home_sticky = "true"
+
+# Number weeks.
+# set number_weeks = "true"
+
+# Don't issue warnings in advance.
+# set advance_warning = "false"
+
+# Mark even if there's only one tiny entry.
+# set busy_level1 = "0"
+
+# Set colors.
+# color calendar_level1 white black
+# color calendar_level2 green black
+# color calendar_level3 red   black
+
+bind "G" home
+bind "q" quit

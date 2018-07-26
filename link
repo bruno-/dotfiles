@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+link() {
+  local file="$1"
+  ln -sfv $CURRENT_DIR/$file $HOME
+}
+
+link .bash_profile
+link .bashrc
+link .s3cfg
+link .tmux.conf
+link .vim
+link .wyrdrc
+
+ln -sfv $CURRENT_DIR/git/ ~/.config
+ln -sfv $CURRENT_DIR/mutt/ ~/.config

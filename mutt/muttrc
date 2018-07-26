@@ -1,0 +1,45 @@
+# vi: ft=muttrc
+source ~/data/src/dotfiles/mutt/config
+
+color status default black
+
+# Default inbox.
+set spoolfile = "+bruno-brunosutic.com/inbox"
+set mbox      = "+bruno-brunosutic.com/archive"
+set postponed = "+bruno-brunosutic.com/postponed"
+
+# msmtp
+set from = "bruno@brunosutic.com"
+my_hdr X-Delay: default
+set sendmail = "/usr/local/bin/msmtp -C $HOME/data/src/private_dotfiles/msmtprc -a bruno-brunosutic.com"
+
+alternates '^(me|contact|hk|github|pbz|[bc][1-4])@brunosutic.com$'
+alternates '^(ocbc|bruno)@enliteup.com$'
+
+subscribe @noreply.github.com
+subscribe tmux-users@googlegroups.com
+
+set record=!
+
+bind index F flag-message
+
+macro pager T "<pipe-entry>create_email_task<enter>" "Create a task"
+
+macro index S "\
+<shell-escape>NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/brunosutic.com mutt-notmuch-py ~/data/mail/bruno-brunosutic.com/temporary/search<enter>\
+<change-folder-readonly>+bruno-brunosutic.com/temporary/search<enter>\
+<enter-command>macro index F <enter>\
+" "search mail (using notmuch)"
+
+macro index o "\
+<shell-escape>getmail --quiet --getmaildir=$HOME/data/src/private_dotfiles/getmail/ --rcfile=getmailrc-brunosutic<enter>\
+<shell-escape>NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/brunosutic.com notmuch new --quiet<enter>\
+<change-folder>!<enter>\
+" "run getmail to sync mail"
+
+macro index  "\
+<copy-message>~/data/mail/bruno-brunosutic.com/temporary/search/flag/<enter>\
+<shell-escape>toggle-message-flag ~/data/mail/bruno-brunosutic.com/temporary/search<enter>\
+<collapse-all>\
+<collapse-thread>\
+" "toggle message flag"

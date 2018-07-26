@@ -1,0 +1,32 @@
+# MS Word documents
+application/msword; ~/data/src/dotfiles/mutt/view_attachment.sh %s "-" '/Applications/Microsoft Office 2011/Microsoft Word.app'
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; ~/data/src/dotfiles/mutt/view_attachment.sh %s "-" '/Applications/Microsoft Office 2011/Microsoft Word.app'
+
+application/vnd.ms-excel; ~/data/src/dotfiles/mutt/view_attachment.sh %s "-" '/Applications/Microsoft Office 2011/Microsoft Excel.app'
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; ~/data/src/dotfiles/mutt/view_attachment.sh %s "-" '/Applications/Microsoft Office 2011/Microsoft Excel.app'
+
+# Images
+image/jpg; ~/data/src/dotfiles/mutt/view_attachment.sh %s jpg
+image/jpeg; ~/data/src/dotfiles/mutt/view_attachment.sh %s jpg
+image/pjpeg; ~/data/src/dotfiles/mutt/view_attachment.sh %s jpg
+image/png; ~/data/src/dotfiles/mutt/view_attachment.sh %s png
+image/gif; ~/data/src/dotfiles/mutt/view_attachment.sh %s gif
+
+# PDFs
+application/pdf; ~/data/src/dotfiles/mutt/view_attachment.sh %s pdf
+
+# HTML
+text/html; ~/data/src/dotfiles/mutt/view_attachment.sh %s html
+# text/html; w3m -I %{charset} -T text/html; copiousoutput;
+# text/html; links %s; nametemplate=%s.html
+text/html; links -dump -html-numbered-links 1 %s; nametemplate=%s.html; copiousoutput
+
+# iCal, vcs
+text/calendar; ~/data/bin/vcal -all %s | less
+application/ics; ~/data/bin/vcal -all %s | less
+
+# TXT
+text/plain; ~/data/src/dotfiles/mutt/view_attachment.sh %s txt
+
+# Unidentified files
+application/octet-stream; ~/data/src/dotfiles/mutt/view_attachment.sh %s "-"

@@ -1,0 +1,2 @@
+*.doc diff=word
+db/schema.rb merge=railsschema

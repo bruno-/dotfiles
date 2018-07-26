@@ -1,0 +1,14 @@
+--regex-ruby=/^[ \t]*alias_method[ \t]+:([^, \t]+)/\1/m,method/
+--regex-ruby=/^[ \t]*alias[ \t]+:?([^ \t]+)/\1/m,method/
+--regex-ruby=/^[ \t]*concern[ \t]+:?([^ \t]+)/\1/c,class/
+--regex-ruby=/^[ \t]*(scope|has_many|has_one|belongs_to)[ \t]+:?([^, \t]+)/\2/m,method/
+--regex-ruby=/^[ \t]*([A-Z][A-Za-z_]*)[ \t]*=/\1/c,class/
+--regex-ruby=/shared_context[ \t]+:([^, \t]+)/\1/m,method/
+--regex-ruby=/shared_examples[ \t]+:([^, \t]+)/\1/m,method/
+--regex-c=/^[ \t]*rb_define_(private_|singleton_)?method\([^,]+, "([^"]+)"/\2/m,method/
+--regex-c=/rb_define_const\([^,]+, "([^"]+)"/\1/c,class/
+--regex-c=/rb_define_class\("([^"]+)"/\1/c,class/
+--regex-c=/rb_define_module\("([^"]+)"/\1/m,module/
+--regex-c=/rb_define_class_under\([^,]+, "([^"]+)"/\1/c,class/
+--regex-c=/rb_define_module_under\([^,]+, "([^"]+)"/\1/m,module/
+--regex-c=/rb_define_module_function\([^,]+, "([^"]+)"/\1/m,method/

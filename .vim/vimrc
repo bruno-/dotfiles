@@ -1,0 +1,319 @@
+" vim: foldmethod=marker
+
+" Options {{{1
+
+source $VIMRUNTIME/defaults.vim
+set autoindent
+set complete-=i
+set smarttab
+set laststatus=2
+set lazyredraw
+set sidescrolloff=5
+set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+set sessionoptions-=options
+runtime! macros/matchit.vim
+
+set spelllang=en_us                      " spelling options
+set spellfile=~/.vim/spell/en.utf-8.add  " spell files added with `zg`
+set dictionary+=/usr/share/dict/words    " add standard dictionary
+set hidden                               " hides buffers with changes
+set nojoinspaces                         " 1 space after '.' when joining lines
+set wildignore+=*.o,*.obj,.git,tmp,tags  " ignored files and dirs for :find
+set wildignore+=*.min.js,*.log,*.gif
+set wildignore+=*/tmp/*,*/node_modules/*
+set wildignore+=*.retry
+set fileignorecase                       " ignore file and directory name case
+set path=**                              " :find setup - should always just work
+set mouse-=a                             " disable mouse
+set shortmess+=I                         " do not show vim intro screen
+set noerrorbells visualbell t_vb=        " disable bell and visual bell
+set nobackup noswapfile                  " no backup and no swap files
+set showbreak=\ >\                       " characters shown after a line wrap
+set exrc                                 " load project .vimrc's
+set list                                 " show trailing whitespace, tabs etc
+set colorcolumn=81
+set sidescroll=1                         " nicer horizontal scrolling
+set noequalalways                        " do not resize on window close
+set breakindent
+set formatoptions+=nj
+set regexpengine=1                       " use old regexp engine
+set synmaxcol=200                        " syntax only for the first 200 columns
+set autoread
+
+" Searching
+set ignorecase        " case insensitive search for small caps
+set smartcase         " ... unless search contains at least one capital letter
+set wrapscan          " enable search around end of file
+
+" Statusline
+set statusline=%<%f:%l:%c\ %r%y%m    " filename and flags
+set statusline+=%=\ %{exists('g:this_obsession')?'':'X'} " vim session tracked?
+
+" screen / tmux title
+if len($TMUX) > 0 || len($STY) > 0
+  " set screen title to vim $PWD folder name - format 'v:folder'
+  set titlestring=v:%(%{fnamemodify(expand(\"$PWD\"),\":t\")}%)
+  set t_ts=k
+  set t_fs=\
+  set title
+endif
+
+if has("gui_macvim")
+  set macmeta
+endif
+
+colorscheme industry
+
+" Whitespace, indentation & other filetype options {{{1
+
+" default tab and spaces settings
+set expandtab         " tab is expanded to spaces
+set tabstop=2         " tab is 2 characters
+set shiftwidth=2      " amount of whitespace with < and >
+set softtabstop=2     " 2 chars are deleted with backspace
+" soft & hard wrap options
+set nowrap            " no wrapping at the end of screen
+set linebreak         " soft & hard wrap only on word boundaries
+
+if has("autocmd")
+  augroup indentation_and_options
+    au!
+    au! FileType gitconfig setlocal ts=2 sts=2 sw=2 noexpandtab
+    au! FileType mkd       setlocal tw=80
+    au! FileType make      setlocal ts=8 sts=8 sw=8 noexpandtab
+    " dash is part of the 'word' in files that use css classes
+    au! FileType html,haml,eruby,css,scss setlocal iskeyword+=-
+    au! FileType html,eruby setlocal colorcolumn=""
+    au! FileType mail       setlocal commentstring=>\ %s
+endif
+
+" }}}
+" Mappings {{{1
+" Essentials
+imap <C-C> <nop>
+" gk and gj are 'up' and 'down' for wrapped lines
+noremap k gk
+noremap gk k
+noremap j gj
+noremap gj j
+
+" prevent unwanted window closing
+noremap <C-W>c <Esc>
+noremap <C-W><C-C> <Esc>
+
+" ctrl-d and ctrl-u always move half the screen up or down
+nnoremap <silent> <C-d> :<C-U>set scroll=0<CR><C-d>
+nnoremap <silent> <C-u> :<C-U>set scroll=0<CR><C-u>
+
+nmap <silent> cp :let @+ = expand("%")<CR>
+nmap <silent> cP :let @+ = expand("%:p")<CR>
+
+function! s:GitConflict(reverse)
+  call search('^@@ .* @@\|^[<=>|]\{7}[<=>|]\@!', a:reverse ? 'bW' : 'W')
+endfunction
+
+nmap <silent> [n :call <SID>GitConflict(1)<CR>
+nmap <silent> ]n :call <SID>GitConflict(0)<CR>
+
+" plugin mappings and options {{{1
+" vim-easy-align
+nmap <Bar> <Plug>(EasyAlign)
+xmap <Bar> <Plug>(EasyAlign)
+
+let g:loaded_netrwPlugin = 1 " disable netrw plugin
+let g:ruby_path = [] " prevent vim-ruby from adding stuff to 'path'
+
+" rcodetools & xmpfilter
+let g:xmpfilter_cmd = "seeing_is_believing"
+" only show expression of current line
+nmap <leader>rr <Plug>(seeing_is_believing-clean)<Plug>(seeing_is_believing-mark)<Plug>(seeing_is_believing-run_-x)
+" append only the expression of the current line
+nmap <leader>re <Plug>(seeing_is_believing-mark)<Plug>(seeing_is_believing-run_-x)
+" show expressions for the whole file (all)
+nmap <leader>ra <Plug>(seeing_is_believing-run)
+" clean all seeing_is_believing results
+nmap <leader>rc <Plug>(seeing_is_believing-clean)
+
+" fold functions in shell files
+let g:sh_fold_enabled = 1
+" markdown folding
+let g:markdown_folding = 1
+
+let g:man_width = 80
+
+command! -bar -nargs=1 -complete=file E :exe "edit ".substitute(<q-args>,'\(.*\):\(\d\+\):\=$','+\2 \1','')
+
+" vim-emoji
+set completefunc=emoji#complete
+
+" Autocommands {{{1
+
+function! ReplaceEmoji()
+  let column = col('.')
+  let kind = v:completed_item['kind']
+  let word = v:completed_item['word']
+  if word =~# '^:\([^:]\+\):$'
+    exec ':s/'.word.'/'.kind.'/g'
+    call setpos('.', [0, line('.'), column - len(word) + len(kind), 0])
+  endif
+endfunction
+
+if has("autocmd")
+  augroup vimrcEx
+    au!
+
+    " help K for vim help
+    au FileType help setlocal keywordprg=:help
+    au FileType vim setlocal foldmethod=marker
+    " turn on spelling when writing commit messages
+    au FileType gitcommit setlocal spell spelllang=en_us
+
+    " C
+    " prevent modifying stdlib headers, tab uses 8 spaces
+    au BufNewFile,BufRead /usr/include/* setlocal nomodifiable ts=8
+    au FileType c,cpp nnoremap <silent><buffer> K :exe ":Man 3 ".expand("<cword>")<CR>
+
+    au FocusGained * silent redraw!
+
+    au CompleteDone * call ReplaceEmoji()
+    au Filetype crontab setlocal nobackup nowritebackup
+    au QuickFixCmdPost *grep* redraw!
+  augroup END
+endif
+
+" Abbreviations {{{1
+" handling typos
+ab teh the
+ab hte the
+ab eg e.g.
+ab ie i.e.
+ab Enumberable Enumerable
+ab enumberable enumerable
+ab Enumberator Enumerator
+ab enumberator enumerator
+ab destory destroy
+ab nging nginx
+ab Javascript JavaScript
+ab javascript JavaScript
+ab Lockstate LockState
+" command line typos
+cab e1 e!
+cab E! e!
+cab E1 e!
+cab qa1 qa!
+cab qA1 qa!
+cab qA qa
+cab qA! qa!
+cab gWr Gwrite
+cab GWr Gwrite
+cab show g/\C^\s*\(class\s\\|module\s\\|def\s\\|private\\|protected\\|public\)/p
+
+" Vim command line abbreviations
+" grepping the repo
+cab gg silent Ggrep!
+" 'j' don't jump to first result, case insensitive (based on :set ignorecase?)
+cab vg vimgrep //j **/*<Left><Left><Left><Left><Left><Left><Left>
+" pedit won't work, it will open the cc in the current file
+cab pp pedit <Bar>
+cnoreab cc silent cc
+" cab vh vert help
+cnoreab Q set splitbelow <Bar> q <Bar> set nosplitbelow
+
+" Snippets {{{1
+
+" generic
+silent inoreabbrev ssh_ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCh2B815M0WDjIP6wfC4oMJl3KMyWG+YfQjov/amHZcBD/r8f6SDjD+JWiooYdmr1dT87LUenmzs1Nd5PXIhGFPPkTCkJ0wIpyyRUQrUQsMnRY59GB/Hio9xyHua7e+6sK+iwmO6iG+GXH511dRqQ2kN4YhJRJMkgkj8ZknWAIBAledVmf4o3mCbKp4lyHA6ybZOO7qos6Zh0WUK0KHi6cJqrRusZQQ4CRRYKD3ChunZIyjImS3Pn0uX1nmYi6X+px/ddCUmRwvI2tFkCgPVJZrH6RbBjM/7+aOBKcAmQDHIcanZKA3IE7819AE5a8V8evIj0SDr9E9HfM7ick0b1OX
+silent inoreabbrev todo_ TODO:
+silent inoreabbrev #! #!/usr/bin/env bash<CR>
+silent inoreabbrev eur_ €
+silent inoreabbrev gbp_ £
+silent inoreabbrev yen_ ¥
+silent inoreabbrev mit_ Copyright (C) Bruno Sutic
+\<CR>Permission is hereby granted, free of charge, to any person obtaining
+\<CR>a copy of this software and associated documentation files (the "Software"),
+\<CR>to deal in the Software without restriction, including without limitation
+\<CR>the rights to use, copy, modify, merge, publish, distribute, sublicense,
+\<CR>and/or sell copies of the Software, and to permit persons to whom the
+\<CR>Software is furnished to do so, subject to the following conditions:
+\<CR>
+\<CR>The above copyright notice and this permission notice shall be included
+\<CR>in all copies or substantial portions of the Software.
+\<CR>
+\<CR>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+\<CR>EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+\<CR>OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+\<CR>IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+\<CR>DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+\<CR>TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+\<CR>OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+function! RubySnippets()
+  silent inoreabbrev <buffer> pry_ require "pry"; binding.pry
+  silent inoreabbrev <buffer> bb_ byebug
+  silent inoreabbrev <buffer> c_ class <CR>end<Up><C-O>$
+  silent inoreabbrev <buffer> m_ module <CR>end<Up><C-O>$
+  silent inoreabbrev <buffer> d_ def <CR>end<Up><Right>
+  silent inoreabbrev <buffer> di_ def initialize<CR>end<Up><C-O>$
+  silent inoreabbrev <buffer> ds_ def self.<CR>end<Up><C-O>$
+  silent inoreabbrev <buffer> ar_ attr_reader :
+  silent inoreabbrev <buffer> aw_ attr_writer :
+  silent inoreabbrev <buffer> arw_ attr_accessor :
+  silent inoreabbrev <buffer> req_ require ""<Left>
+  silent inoreabbrev <buffer> vim_ # vim: fdm=marker
+  silent inoreabbrev <buffer> here_ <<~HERE<CR>HERE<Up><C-O>$
+  silent inoreabbrev <buffer> del_ delegate :, to: :<Left><Left><Left><Left><Left><Left><Left>
+  silent inoreabbrev <buffer> p_ private
+  silent inoreabbrev <buffer> f_ <C-R>=substitute(expand('%:t:r'), '\(_\\|^\)\(.\)', '\u\2', 'g')<CR>
+  silent inoreabbrev <buffer> csv_ require 'csv'<CR>CSV.open('file.csv', 'w') { \|csv\| csv << [] }<Left><Left><Left>
+  " RSpec snippets
+  silent inoreabbrev <buffer> e_ expect().to<Left><Left><Left><Left>
+  silent inoreabbrev <buffer> l_ let(:)<Left>
+  silent inoreabbrev <buffer> do_ double('')<Left><Left>
+  silent inoreabbrev <buffer> it_ it '' do<CR>end<Up><Right>
+  silent inoreabbrev <buffer> de_ describe '' do<CR>end<Up><Right><Right><Right><Right><Right><Right><Right>
+  silent inoreabbrev <buffer> co_ context '' do<CR>end<Up><Right><Right><Right><Right><Right><Right>
+  silent inoreabbrev <buffer> rde_ RSpec.describe '' do<CR>end<Up><C-O>$
+  silent inoreabbrev <buffer> Rspec RSpec
+  silent inoreabbrev <buffer> Rspect RSpec
+endfunction
+
+function! ERubySnippets()
+  silent inoreabbrev <buffer> =_  <%=  %><Left><Left><Left>
+  silent inoreabbrev <buffer> %_  <%  %><Left><Left><Left>
+  silent inoreabbrev <buffer> #_  <%#  %><Left><Left><Left>
+  silent inoreabbrev <buffer> if_ <% if  %><CR><% end %><Up><Left><Left><Left>
+  silent inoreabbrev <buffer> ife_ <% if  %><CR><% else %><CR><% end %><Up><Up><Left><Left><Left>
+  silent inoreabbrev <buffer> else_ <% else %>
+  silent inoreabbrev <buffer> end_ <% end %>
+  silent inoreabbrev <buffer> pry_ <% require "pry"; binding.pry %>
+endfunction
+
+function! VimSnippets()
+  silent inoreabbrev <buffer> f_ function! ()<CR>endfunction<Up><Left>
+endfunction
+
+function! JavascriptSnippets()
+  silent inoreabbrev <buffer> log_ console.log('')<Left><Left>
+endfunction
+
+function! CSnippets()
+  silent inoreabbrev <buffer> io_ #include <stdio.h>
+  silent inoreabbrev <buffer> lib_ #include <stdlib.h>
+  silent inoreabbrev <buffer> m_ int main(void)<CR>{<CR>return 0;<CR>}<Up><Up><CR>
+  silent inoreabbrev <buffer> ma_ int main(int argc, char **argv)<CR>{<CR>return 0;<CR>}<Up><Up><CR>
+  silent inoreabbrev <buffer> for_ for() {<CR>}<Up><Right><Right><Right>
+  silent inoreabbrev <buffer> p_ printf("\n");<Left><Left><Left><Left><Left>
+  silent inoreabbrev <buffer> s_ scanf("");<Left><Left><Left>
+endfunction
+
+if has("autocmd")
+  augroup snippets
+    au!
+
+    au FileType ruby call RubySnippets()
+    au FileType eruby call ERubySnippets()
+    au FileType vim call VimSnippets()
+    au FileType javascript call JavascriptSnippets()
+    au FileType c,cpp call CSnippets()
+  augroup END
+endif

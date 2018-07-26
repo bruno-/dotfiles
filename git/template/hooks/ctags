@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+PATH="/usr/local/bin:$PATH"
+dir="`git rev-parse --git-dir`"
+trap "rm -f .git/tags.$$" EXIT INT TERM
+git ls-files | ctags -L - -f$dir/tags.$$ --exclude='*.min.js' --languages=-sql --languages=-ocaml
+mv $dir/tags.$$ tags

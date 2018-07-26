@@ -1,0 +1,26 @@
+# vi: ft=muttrc
+source ~/data/src/dotfiles/mutt/config
+
+color status default color24 # blue
+
+# Default inbox.
+set spoolfile = "+bruno.sutic-gmail.com/inbox"
+set mbox      = "+bruno.sutic-gmail.com/archive"
+set postponed = "+bruno.sutic-gmail.com/postponed"
+unset record # do not record sent email
+
+# msmtp
+set from = "bruno.sutic@gmail.com"
+unmy_hdr *
+set sendmail = "/usr/local/bin/msmtp -C $HOME/data/src/private_dotfiles/msmtprc -a brunosutic-gmail-com"
+
+macro index S "\
+<shell-escape>NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/gmail mutt-notmuch-py ~/data/mail/bruno.sutic-gmail.com/temporary/search<enter>\
+<change-folder-readonly>+bruno.sutic-gmail.com/temporary/search<enter>\
+" "search mail (using notmuch)"
+
+macro index o "\
+<shell-escape>getmail --getmaildir=$HOME/data/src/private_dotfiles/getmail/ --rcfile=getmailrc-gmail --quiet<enter>\
+<shell-escape>NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/gmail notmuch new --quiet<enter>\
+<change-folder>!<enter>\
+" "run getmail to sync mail"
