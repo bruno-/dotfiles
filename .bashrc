@@ -42,6 +42,7 @@ export WEECHAT_HOME="$HOME/data/var/weechat"
 export IRBRC="$HOME/data/src/dotfiles/irbrc"
 export PRYRC="$HOME/data/src/dotfiles/pryrc"
 export INPUTRC="$HOME/data/src/dotfiles/inputrc"
+export DISABLE_SPRING=true
 export TIMEWARRIORDB="$HOME/data/var/timewarrior"
 export TASKRC="$HOME/data/src/dotfiles/taskrc"
 export DOTREMINDERS="$HOME/data/var/reminders"

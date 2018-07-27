@@ -5,7 +5,7 @@ rescue LoadError => e
 end
 
 if defined? Pry
-  extend Rails::ConsoleMethods if defined? Rails
+  extend Rails::ConsoleMethods if defined? Rails::ConsoleMethods
   Pry.start
   exit
 else

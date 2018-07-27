@@ -28,6 +28,7 @@ set mouse-=a                             " disable mouse
 set shortmess+=I                         " do not show vim intro screen
 set noerrorbells visualbell t_vb=        " disable bell and visual bell
 set nobackup noswapfile                  " no backup and no swap files
+set viminfofile=NONE                     " no viminfo file
 set showbreak=\ >\                       " characters shown after a line wrap
 set exrc                                 " load project .vimrc's
 set list                                 " show trailing whitespace, tabs etc
@@ -248,8 +249,7 @@ silent inoreabbrev mit_ Copyright (C) Bruno Sutic
 \<CR>OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 function! RubySnippets()
-  silent inoreabbrev <buffer> pry_ require "pry"; binding.pry
-  silent inoreabbrev <buffer> bb_ byebug
+  silent inoreabbrev <buffer> irb_ binding.irb
   silent inoreabbrev <buffer> c_ class <CR>end<Up><C-O>$
   silent inoreabbrev <buffer> m_ module <CR>end<Up><C-O>$
   silent inoreabbrev <buffer> d_ def <CR>end<Up><Right>
