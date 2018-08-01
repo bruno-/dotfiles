@@ -2,7 +2,7 @@
 
 # Bash completion
 if [ -f /usr/local/share/bash-completion/bash_completion ]; then
-  source /usr/local/share/bash-completion/bash_completion
+  source /usr/local/share/bash-completion/bash_completion 2>/dev/null
 fi
 
 # Bash prompt
@@ -70,9 +70,9 @@ export SURFRAW_graphical=no
 export HOMEBREW_NO_ANALYTICS=1
 
 # Bash options
-bind 'set bell-style none' # disable shell (visual) bell
-stty werase undef # setting this enables better readline Ctrl-W
-stty -ixon -ixoff # Ctrl-S can be used as an opposite to Ctrl-R (necessary in bash)
+bind 'set bell-style none' 2>/dev/null # disable shell (visual) bell
+stty werase undef 2>/dev/null # setting this enables better readline Ctrl-W
+stty -ixon -ixoff 2>/dev/null # Ctrl-S can be used as an opposite to Ctrl-R (necessary in bash)
 
 alias mv='mv -i'
 alias cp='cp -i'
