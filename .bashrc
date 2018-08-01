@@ -29,7 +29,7 @@ source_nvm() {
 }
 
 # Bash history
-export HISTFILE="$HOME/.config/bash_history"
+export HISTFILE="$HOME/data/var/log/bash_history"
 export HISTSIZE=100000           # expands history size
 export HISTFILESIZE=100000
 # ignoredups:ignorespace - ignores double commands and those that begin with space
