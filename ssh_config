@@ -1,0 +1,50 @@
+Host brunosutic.com
+User deploy
+HostName brunosutic.com
+Port 22
+
+Host tmux_remote_pair
+User root
+HostName brunosutic.com
+Port 22
+RemoteForward 1234 127.0.0.1:22
+
+Host remote_forward
+User root
+HostName brunosutic.com
+Port 22
+RemoteForward 3000 127.0.0.1:3000
+
+Host kolajna
+User bruno
+HostName 89.22.98.31
+
+Host mercury.forw
+HostName mercury.lockstate.net
+RemoteForward 3002 127.0.0.1:3001
+RemoteForward 3003 127.0.0.1:3000
+User root
+
+Host *
+StrictHostKeyChecking no
+UserKnownHostsFile=/dev/null
+LogLevel=error
+ServerAliveCountMax 5
+TCPKeepAlive yes
+ServerAliveInterval 60
+ForwardAgent yes
+# PermitLocalCommand yes
+# LocalCommand [[ -s "$HOME/screen_ssh.sh" ]] && ~/screen_ssh.sh $PPID %r %n
+# ControlMaster auto
+# ControlPath /tmp/ssh-master-%r@%h:%p
+
+# Check SSH_AUTH_SOCK env variable on remote machine to check if
+# ForwardAgent is working.
+#
+# Remote port forwarding
+# ssh -R 3022:localhost:22 user@server
+# - first number is a port on remote machine (server)
+# - localhost:22 is a port visible from local machine
+#
+# SSH port forwarding option
+# AllowTcpForwarding yes

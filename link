@@ -14,5 +14,8 @@ link .tmux.conf
 link .vim
 link .wyrdrc
 
+mkdir -p ~/.config
 ln -sfv $CURRENT_DIR/git/ ~/.config
 ln -sfv $CURRENT_DIR/mutt/ ~/.config
+ln -sfv $CURRENT_DIR/ssh_config ~/.ssh/config
+ln -sfv $CURRENT_DIR/ssh_authorized_keys/ ~/.ssh/authorized_keys
