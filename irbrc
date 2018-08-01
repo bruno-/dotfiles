@@ -13,6 +13,6 @@ else
   require "irb/ext/save-history"
   require "irb/completion"
   IRB.conf[:SAVE_HISTORY] = 1000
-  IRB.conf[:HISTORY_FILE] = "~/.config/irb_history"
+  IRB.conf[:HISTORY_FILE] = "~/data/var/log/irb_history"
   IRB.conf[:USE_READLINE] = true
 end

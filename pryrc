@@ -1,1 +1,1 @@
-Pry.config.history.file = "~/.config/pry_history"
+Pry.config.history.file = "~/data/var/log/pry_history"
