@@ -12,6 +12,7 @@ link .bashrc
 link .s3cfg
 link .tmux.conf
 link .vim
+link .vitrc
 link .wyrdrc
 
 mkdir -p $HOME/.config
