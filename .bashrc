@@ -45,6 +45,7 @@ export INPUTRC="$HOME/data/src/dotfiles/inputrc"
 export DISABLE_SPRING=true
 export TIMEWARRIORDB="$HOME/data/var/timewarrior"
 export TASKRC="$HOME/data/src/dotfiles/taskrc"
+export BUGWARRIORRC="$HOME/data/src/dotfiles/bugwarriorrc"
 export DOTREMINDERS="$HOME/data/var/reminders"
 export CTAGS="--options=$HOME/data/src/dotfiles/ctags"
 export GNUPGHOME="$HOME/data/src/private_dotfiles/gnupg"
