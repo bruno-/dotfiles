@@ -18,5 +18,8 @@ link .wyrdrc
 mkdir -p $HOME/.config
 ln -sfv $CURRENT_DIR/git/ $HOME/.config
 ln -sfv $CURRENT_DIR/mutt/ $HOME/.config
+
+mkdir -p $HOME/.ssh
+chmod 700 $HOME/.ssh
 ln -sfv $CURRENT_DIR/ssh_config $HOME/.ssh/config
 ln -sfv $CURRENT_DIR/ssh_authorized_keys/ $HOME/.ssh/authorized_keys
