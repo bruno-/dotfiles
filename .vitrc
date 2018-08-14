@@ -1,1 +1,2 @@
-map t=:!r task %TASKID 
+map t=:!r task 
+map T=:!r task %TASKID 
