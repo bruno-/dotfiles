@@ -68,7 +68,6 @@ export PKG_CONFIG_PATH=$MY_PREFIX/lib/pkgconfig   # pkg-config additional path
 unset MAILCHECK
 export SURFRAW_text_browser=links
 export SURFRAW_graphical=no
-export HOMEBREW_NO_ANALYTICS=1
 
 # Bash options
 bind 'set bell-style none' 2>/dev/null # disable shell (visual) bell
