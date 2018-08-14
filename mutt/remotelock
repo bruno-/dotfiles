@@ -1,0 +1,47 @@
+# vi: ft=muttrc
+source ~/data/src/dotfiles/mutt/config
+
+color status default color90 # magenta
+
+# Default inbox.
+set spoolfile = "+bruno-remotelock.com/inbox"
+set mbox      = "+bruno-remotelock.com/archive"
+set postponed = "+bruno-remotelock.com/postponed"
+unset record # do not record sent email
+
+# msmtp
+set from = "bruno@remotelock.com"
+my_hdr X-Delay: default
+set sendmail = "/usr/local/bin/msmtp -C $HOME/data/src/private_dotfiles/msmtprc -a bruno-remotelock.com"
+
+alternates '^developers@(lockstate|remotelock).com$'
+
+subscribe @noreply.github.com
+subscribe developers.*@lockstate.com
+subscribe developers.*@remotelock.com
+
+set index_format = " %Z | %X | %D | %-30.30F  %-30.30L  %2M  %s"
+
+# unbind command set by macro
+bind index F flag-message
+
+macro pager T "<pipe-entry>create_email_task +work<enter>" "Create a task"
+
+macro index S "\
+<shell-escape>NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/remotelock mutt-notmuch-py ~/data/mail/bruno-remotelock.com/temporary/search<enter>\
+<change-folder-readonly>+bruno-remotelock.com/temporary/search<enter>\
+<enter-command>macro index F <enter>\
+" "search mail (using notmuch)"
+
+macro index o "\
+<shell-escape>getmail --getmaildir=$HOME/data/src/private_dotfiles/getmail/ --rcfile=getmailrc-remotelock --quiet<enter>\
+<shell-escape>NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/remotelock notmuch new --quiet<enter>\
+<change-folder>!<enter>\
+" "run getmail to sync mail"
+
+macro index  "\
+<copy-message>~/data/mail/bruno-remotelock.com/temporary/search/flag/<enter>\
+<shell-escape>toggle-message-flag ~/data/mail/bruno-remotelock.com/temporary/search<enter>\
+<collapse-all>\
+<collapse-thread>\
+" "toggle message flag"

@@ -1,7 +1,7 @@
 # routes incoming mail to appropriate mailboxes
 PATH=/usr/bin:/usr/local/bin
-MAILDIR=$HOME/data/mail/bruno-lockstate.com/
-DEFAULT=$HOME/data/mail/bruno-lockstate.com/inbox/
+MAILDIR=$HOME/data/mail/bruno-remotelock.com/
+DEFAULT=$HOME/data/mail/bruno-remotelock.com/inbox/
 LOGFILE=/dev/null
 SHELL=/bin/sh
 

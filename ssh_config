@@ -19,12 +19,6 @@ Host kolajna
 User bruno
 HostName 89.22.98.31
 
-Host mercury.forw
-HostName mercury.lockstate.net
-RemoteForward 3002 127.0.0.1:3001
-RemoteForward 3003 127.0.0.1:3000
-User root
-
 Host *
 StrictHostKeyChecking no
 UserKnownHostsFile=/dev/null

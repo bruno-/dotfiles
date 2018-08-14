@@ -11,7 +11,7 @@
 # configured here named ".notmuch".
 #
 [database]
-path=/Users/bruno/data/mail/bruno-lockstate.com
+path=/Users/bruno/data/mail/bruno-remotelock.com
 
 # User configuration
 #
@@ -30,7 +30,7 @@ path=/Users/bruno/data/mail/bruno-lockstate.com
 #
 [user]
 name=Bruno Sutic
-primary_email=bruno@lockstate.com
+primary_email=bruno@remotelock.com
 
 # Configuration for "notmuch new"
 #
