@@ -1,7 +1,7 @@
 # vi: ft=muttrc
 source ~/data/src/dotfiles/mutt/config
 
-color status default color24 # blue
+color status black brightwhite
 
 # Default inbox.
 set spoolfile = "+bruno.sutic-gmail.com/inbox"

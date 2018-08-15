@@ -1,7 +1,7 @@
 # vi: ft=muttrc
 source ~/data/src/dotfiles/mutt/config
 
-color status default color90 # magenta
+color status black color214 # RemoteLock orange
 
 # Default inbox.
 set spoolfile = "+bruno-remotelock.com/inbox"
