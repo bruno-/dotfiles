@@ -197,6 +197,7 @@ ab nging nginx
 ab Javascript JavaScript
 ab javascript JavaScript
 ab Lockstate LockState
+ab Remotelock RemoteLock
 " command line typos
 cab e1 e!
 cab E! e!
@@ -249,7 +250,7 @@ silent inoreabbrev mit_ Copyright (C) Bruno Sutic
 \<CR>OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 function! RubySnippets()
-  silent inoreabbrev <buffer> irb_ binding.irb
+  silent inoreabbrev <buffer> pry_ require 'pry'; binding.pry
   silent inoreabbrev <buffer> c_ class <CR>end<Up><C-O>$
   silent inoreabbrev <buffer> m_ module <CR>end<Up><C-O>$
   silent inoreabbrev <buffer> d_ def <CR>end<Up><Right>
