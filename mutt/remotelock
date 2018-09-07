@@ -1,7 +1,7 @@
 # vi: ft=muttrc
 source ~/data/src/dotfiles/mutt/config
 
-color status black color214 # RemoteLock orange
+color status black color215 # RemoteLock orange
 
 # Default inbox.
 set spoolfile = "+bruno-remotelock.com/inbox"
@@ -14,6 +14,7 @@ set from = "bruno@remotelock.com"
 my_hdr X-Delay: default
 set sendmail = "/usr/local/bin/msmtp -C $HOME/data/src/private_dotfiles/msmtprc -a bruno-remotelock.com"
 
+alternates 'bruno@lockstate.com'
 alternates '^developers@(lockstate|remotelock).com$'
 
 subscribe @noreply.github.com

@@ -39,7 +39,7 @@ hdr_order from: to: reply-to: cc: date: X-Date: subject:  # and in this order
 set user_agent = no
 
 # Index View Options ---------------------------------
-set date_format = "%Y-%m-%d %H:%M"
+set date_format = "%a %Y-%m-%d %H:%M"
 set index_format = " %Z | %X | %D | %-30.30L  %2M  %s"
 # docs: http://www.rdrop.com/docs/mutt/manual93.html
 set sort = threads
