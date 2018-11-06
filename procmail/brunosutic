@@ -13,6 +13,16 @@ SHELL=/bin/sh
 archive/
 
 :0:
+* ^(To|Cc|CC).*(contact)@brunosutic.com
+* ^Reply-To.*.ru>?
+spam/
+
+:0:
+* ^From.*.ru>?
+* ^(To|Cc|CC).*(contact)@brunosutic.com
+spam/
+
+:0:
 * ^X-getmail-retrieved-from-mailbox: Sent
 archive/
 
@@ -23,3 +33,7 @@ archive/
 :0:
 * ^(To|Cc|CC).*(toastmasters|dkim)@brunosutic.com
 archive/
+
+:0:
+* ^From.*(Uber Receipts)
+/dev/null/

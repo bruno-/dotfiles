@@ -21,17 +21,19 @@ archive/
 archive/
 
 :0:
-* ^Subject: Confirmation instructions
+* ^Subject:.*(Confirmation instructions|PagerDuty Account and Invoice|Your CircleCI invoice|Invoice from Contributed Systems LLC|Amazon Web Services Invoice Available|AWS Free Tier limit alert)
+/dev/null
+
+:0:
+* ^From:.*noreply@md.getsentry.com
+* ^Subject:.*Payment Receipt
+/dev/null
+
+:0:
+* ^From:.*(automated@airbnb.com|noreply@aylanetworks.com|support@eleviomail.com)
 archive/
 
 :0:
-* ^From:.*noreply@aylanetworks.com
-archive/
-
-:0:
-* ^From:.*automated@airbnb.com
-archive/
-
-:0:
-* ^From:.*support@eleviomail.com
+* ^From:.*support@stripe.com
+* ^Subject:.*dispute.*
 archive/
