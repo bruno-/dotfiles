@@ -9,7 +9,7 @@ service = jira
 jira.base_uri = https://remotelock.atlassian.net
 jira.username = bruno
 jira.password = @oracle:eval:echo $JIRA_PASSWORD
-jira.query = assignee = bruno and status != closed and status != resolved and sprint = 'RL Sprint 1 : 20JUL-10AUG 2018'
+jira.query = assignee = bruno and status != closed and status != resolved and sprint = 'RL Sprint 2'
 jira.add_tags = work, current-sprint
 jira.description_template = {{ jiraid }} {{ jirasummary }}
 
