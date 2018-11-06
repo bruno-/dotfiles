@@ -267,3 +267,6 @@ mios
 rubocop
 zwave
 denver
+runbook
+whitespace
+hashmap

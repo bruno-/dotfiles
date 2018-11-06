@@ -86,6 +86,7 @@ if has("autocmd")
     au! FileType html,haml,eruby,css,scss setlocal iskeyword+=-
     au! FileType html,eruby setlocal colorcolumn=""
     au! FileType mail       setlocal commentstring=>\ %s
+    au! FileType c,cpp      setlocal commentstring=//%s
 endif
 
 " }}}
@@ -263,6 +264,7 @@ function! RubySnippets()
   silent inoreabbrev <buffer> vim_ # vim: fdm=marker
   silent inoreabbrev <buffer> here_ <<~HERE<CR>HERE<Up><C-O>$
   silent inoreabbrev <buffer> del_ delegate :, to: :<Left><Left><Left><Left><Left><Left><Left>
+  silent inoreabbrev <buffer> pdel_ private(*delegate(:, to: :))<Left><Left><Left><Left><Left><Left><Left><Left><Left>
   silent inoreabbrev <buffer> p_ private
   silent inoreabbrev <buffer> f_ <C-R>=substitute(expand('%:t:r'), '\(_\\|^\)\(.\)', '\u\2', 'g')<CR>
   silent inoreabbrev <buffer> csv_ require 'csv'<CR>CSV.open('file.csv', 'w') { \|csv\| csv << [] }<Left><Left><Left>
@@ -302,7 +304,7 @@ function! CSnippets()
   silent inoreabbrev <buffer> lib_ #include <stdlib.h>
   silent inoreabbrev <buffer> m_ int main(void)<CR>{<CR>return 0;<CR>}<Up><Up><CR>
   silent inoreabbrev <buffer> ma_ int main(int argc, char **argv)<CR>{<CR>return 0;<CR>}<Up><Up><CR>
-  silent inoreabbrev <buffer> for_ for() {<CR>}<Up><Right><Right><Right>
+  silent inoreabbrev <buffer> for_ for () {<CR>}<Up><Right><Right><Right>
   silent inoreabbrev <buffer> p_ printf("\n");<Left><Left><Left><Left><Left>
   silent inoreabbrev <buffer> s_ scanf("");<Left><Left><Left>
 endfunction
