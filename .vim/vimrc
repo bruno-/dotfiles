@@ -86,7 +86,7 @@ if has("autocmd")
     au! FileType html,haml,eruby,css,scss setlocal iskeyword+=-
     au! FileType html,eruby setlocal colorcolumn=""
     au! FileType mail       setlocal commentstring=>\ %s
-    au! FileType c,cpp      setlocal commentstring=//%s
+    au! FileType c,cpp      setlocal commentstring=//%s path+=/usr/include
 endif
 
 " }}}
@@ -304,7 +304,7 @@ function! CSnippets()
   silent inoreabbrev <buffer> lib_ #include <stdlib.h>
   silent inoreabbrev <buffer> m_ int main(void)<CR>{<CR>return 0;<CR>}<Up><Up><CR>
   silent inoreabbrev <buffer> ma_ int main(int argc, char **argv)<CR>{<CR>return 0;<CR>}<Up><Up><CR>
-  silent inoreabbrev <buffer> for_ for () {<CR>}<Up><Right><Right><Right>
+  silent inoreabbrev <buffer> for_ for () {<CR>}<Up><Right><Right><Right><Right>
   silent inoreabbrev <buffer> p_ printf("\n");<Left><Left><Left><Left><Left>
   silent inoreabbrev <buffer> s_ scanf("");<Left><Left><Left>
 endfunction
