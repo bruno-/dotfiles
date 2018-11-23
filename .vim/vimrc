@@ -89,6 +89,9 @@ if has("autocmd")
     au! FileType c,cpp      setlocal commentstring=//%s path+=/usr/include
 endif
 
+" syntax
+hi def link markdownError NONE
+
 " }}}
 " Mappings {{{1
 " Essentials
