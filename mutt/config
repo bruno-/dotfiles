@@ -25,6 +25,8 @@ set autoedit             # jump to message body when composing mail
 unset record             # do not record sent email
 set recall = no          # do not ask to use postponed mail
 set editor='vim -c "norm! }gwGgg"' # auto format mail when responding
+set print_command="cat > $HOME/Desktop/email_$(date '+%Y-%m-%dT%H%M%S').txt"
+set print=yes
 
 # Status Bar -----------------------------------------
 set status_chars  = " *%A"
