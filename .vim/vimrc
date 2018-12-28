@@ -154,6 +154,10 @@ set completefunc=emoji#complete
 " Autocommands {{{1
 
 function! ReplaceEmoji()
+  if !(has_key(v:completed_item, 'kind') && has_key(v:completed_item, 'word'))
+    return
+  endif
+
   let column = col('.')
   let kind = v:completed_item['kind']
   let word = v:completed_item['word']
@@ -181,7 +185,6 @@ if has("autocmd")
     au FocusGained * silent redraw!
 
     au CompleteDone * call ReplaceEmoji()
-    au Filetype crontab setlocal nobackup nowritebackup
     au QuickFixCmdPost *grep* redraw!
   augroup END
 endif
@@ -214,44 +217,10 @@ cab gWr Gwrite
 cab GWr Gwrite
 cab show g/\C^\s*\(class\s\\|module\s\\|def\s\\|private\\|protected\\|public\)/p
 
-" Vim command line abbreviations
-" grepping the repo
-cab gg silent Ggrep!
-" 'j' don't jump to first result, case insensitive (based on :set ignorecase?)
-cab vg vimgrep //j **/*<Left><Left><Left><Left><Left><Left><Left>
-" pedit won't work, it will open the cc in the current file
-cab pp pedit <Bar>
-cnoreab cc silent cc
-" cab vh vert help
-cnoreab Q set splitbelow <Bar> q <Bar> set nosplitbelow
-
 " Snippets {{{1
 
 " generic
-silent inoreabbrev ssh_ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCh2B815M0WDjIP6wfC4oMJl3KMyWG+YfQjov/amHZcBD/r8f6SDjD+JWiooYdmr1dT87LUenmzs1Nd5PXIhGFPPkTCkJ0wIpyyRUQrUQsMnRY59GB/Hio9xyHua7e+6sK+iwmO6iG+GXH511dRqQ2kN4YhJRJMkgkj8ZknWAIBAledVmf4o3mCbKp4lyHA6ybZOO7qos6Zh0WUK0KHi6cJqrRusZQQ4CRRYKD3ChunZIyjImS3Pn0uX1nmYi6X+px/ddCUmRwvI2tFkCgPVJZrH6RbBjM/7+aOBKcAmQDHIcanZKA3IE7819AE5a8V8evIj0SDr9E9HfM7ick0b1OX
-silent inoreabbrev todo_ TODO:
 silent inoreabbrev #! #!/usr/bin/env bash<CR>
-silent inoreabbrev eur_ €
-silent inoreabbrev gbp_ £
-silent inoreabbrev yen_ ¥
-silent inoreabbrev mit_ Copyright (C) Bruno Sutic
-\<CR>Permission is hereby granted, free of charge, to any person obtaining
-\<CR>a copy of this software and associated documentation files (the "Software"),
-\<CR>to deal in the Software without restriction, including without limitation
-\<CR>the rights to use, copy, modify, merge, publish, distribute, sublicense,
-\<CR>and/or sell copies of the Software, and to permit persons to whom the
-\<CR>Software is furnished to do so, subject to the following conditions:
-\<CR>
-\<CR>The above copyright notice and this permission notice shall be included
-\<CR>in all copies or substantial portions of the Software.
-\<CR>
-\<CR>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-\<CR>EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-\<CR>OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-\<CR>IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-\<CR>DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-\<CR>TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
-\<CR>OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 function! RubySnippets()
   silent inoreabbrev <buffer> pry_ require 'pry'; binding.pry
@@ -260,56 +229,19 @@ function! RubySnippets()
   silent inoreabbrev <buffer> d_ def <CR>end<Up><Right>
   silent inoreabbrev <buffer> di_ def initialize<CR>end<Up><C-O>$
   silent inoreabbrev <buffer> ds_ def self.<CR>end<Up><C-O>$
-  silent inoreabbrev <buffer> ar_ attr_reader :
-  silent inoreabbrev <buffer> aw_ attr_writer :
-  silent inoreabbrev <buffer> arw_ attr_accessor :
-  silent inoreabbrev <buffer> req_ require ""<Left>
   silent inoreabbrev <buffer> vim_ # vim: fdm=marker
   silent inoreabbrev <buffer> here_ <<~HERE<CR>HERE<Up><C-O>$
   silent inoreabbrev <buffer> del_ delegate :, to: :<Left><Left><Left><Left><Left><Left><Left>
   silent inoreabbrev <buffer> pdel_ private(*delegate(:, to: :))<Left><Left><Left><Left><Left><Left><Left><Left><Left>
   silent inoreabbrev <buffer> p_ private
-  silent inoreabbrev <buffer> f_ <C-R>=substitute(expand('%:t:r'), '\(_\\|^\)\(.\)', '\u\2', 'g')<CR>
-  silent inoreabbrev <buffer> csv_ require 'csv'<CR>CSV.open('file.csv', 'w') { \|csv\| csv << [] }<Left><Left><Left>
   " RSpec snippets
-  silent inoreabbrev <buffer> e_ expect().to<Left><Left><Left><Left>
-  silent inoreabbrev <buffer> l_ let(:)<Left>
-  silent inoreabbrev <buffer> do_ double('')<Left><Left>
   silent inoreabbrev <buffer> it_ it '' do<CR>end<Up><Right>
   silent inoreabbrev <buffer> de_ describe '' do<CR>end<Up><Right><Right><Right><Right><Right><Right><Right>
   silent inoreabbrev <buffer> co_ context '' do<CR>end<Up><Right><Right><Right><Right><Right><Right>
-  silent inoreabbrev <buffer> rde_ RSpec.describe '' do<CR>end<Up><C-O>$
-  silent inoreabbrev <buffer> Rspec RSpec
-  silent inoreabbrev <buffer> Rspect RSpec
-endfunction
-
-function! ERubySnippets()
-  silent inoreabbrev <buffer> =_  <%=  %><Left><Left><Left>
-  silent inoreabbrev <buffer> %_  <%  %><Left><Left><Left>
-  silent inoreabbrev <buffer> #_  <%#  %><Left><Left><Left>
-  silent inoreabbrev <buffer> if_ <% if  %><CR><% end %><Up><Left><Left><Left>
-  silent inoreabbrev <buffer> ife_ <% if  %><CR><% else %><CR><% end %><Up><Up><Left><Left><Left>
-  silent inoreabbrev <buffer> else_ <% else %>
-  silent inoreabbrev <buffer> end_ <% end %>
-  silent inoreabbrev <buffer> pry_ <% require "pry"; binding.pry %>
-endfunction
-
-function! VimSnippets()
-  silent inoreabbrev <buffer> f_ function! ()<CR>endfunction<Up><Left>
 endfunction
 
 function! JavascriptSnippets()
   silent inoreabbrev <buffer> log_ console.log('')<Left><Left>
-endfunction
-
-function! CSnippets()
-  silent inoreabbrev <buffer> io_ #include <stdio.h>
-  silent inoreabbrev <buffer> lib_ #include <stdlib.h>
-  silent inoreabbrev <buffer> m_ int main(void)<CR>{<CR>return 0;<CR>}<Up><Up><CR>
-  silent inoreabbrev <buffer> ma_ int main(int argc, char **argv)<CR>{<CR>return 0;<CR>}<Up><Up><CR>
-  silent inoreabbrev <buffer> for_ for () {<CR>}<Up><Right><Right><Right><Right>
-  silent inoreabbrev <buffer> p_ printf("\n");<Left><Left><Left><Left><Left>
-  silent inoreabbrev <buffer> s_ scanf("");<Left><Left><Left>
 endfunction
 
 if has("autocmd")
@@ -317,9 +249,6 @@ if has("autocmd")
     au!
 
     au FileType ruby call RubySnippets()
-    au FileType eruby call ERubySnippets()
-    au FileType vim call VimSnippets()
     au FileType javascript call JavascriptSnippets()
-    au FileType c,cpp call CSnippets()
   augroup END
 endif
