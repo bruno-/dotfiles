@@ -35,5 +35,13 @@ archive/
 archive/
 
 :0:
+* ^Subject.*(View your recent transactions now|Your Taxify trip)
+archive/
+
+:0:
 * ^From.*(Uber Receipts)
+/dev/null/
+
+:0:
+* ^Subject.*(Your Taxify trip on Sunday)
 /dev/null/
