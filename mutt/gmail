@@ -20,7 +20,5 @@ macro index S "\
 " "search mail (using notmuch)"
 
 macro index o "\
-<shell-escape>getmail --getmaildir=$HOME/data/src/private_dotfiles/getmail/ --rcfile=getmailrc-gmail --quiet<enter>\
-<shell-escape>NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/gmail notmuch new --quiet<enter>\
-<change-folder>!<enter>\
+<shell-escape>(getmail --getmaildir=$HOME/data/src/private_dotfiles/getmail/ --rcfile=getmailrc-gmail --quiet; NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/gmail notmuch new --quiet) &<enter>\
 " "run getmail to sync mail"

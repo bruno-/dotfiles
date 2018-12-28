@@ -35,9 +35,7 @@ macro index S "\
 " "search mail (using notmuch)"
 
 macro index o "\
-<shell-escape>getmail --getmaildir=$HOME/data/src/private_dotfiles/getmail/ --rcfile=getmailrc-remotelock --quiet<enter>\
-<shell-escape>NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/remotelock notmuch new --quiet<enter>\
-<change-folder>!<enter>\
+<shell-escape>(getmail --getmaildir=$HOME/data/src/private_dotfiles/getmail/ --rcfile=getmailrc-remotelock --quiet; NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/remotelock notmuch new --quiet) &<enter>\
 " "run getmail to sync mail"
 
 macro index  "\

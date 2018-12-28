@@ -13,7 +13,7 @@ set from = "bruno@brunosutic.com"
 my_hdr X-Delay: default
 set sendmail = "/usr/local/bin/msmtp -C $HOME/data/src/private_dotfiles/msmtprc -a bruno-brunosutic.com"
 
-alternates '^(me|contact|hk|github|pbz|njuskalo|natpro|[bc][1-4])@brunosutic.com$'
+alternates '^(me|contact|hk|github|pbz|njuskalo|natpro|[cd][1-4])@brunosutic.com$'
 alternates '^(ocbc|bruno)@enliteup.com$'
 
 subscribe @noreply.github.com
@@ -33,9 +33,7 @@ macro index S "\
 " "search mail (using notmuch)"
 
 macro index o "\
-<shell-escape>getmail --quiet --getmaildir=$HOME/data/src/private_dotfiles/getmail/ --rcfile=getmailrc-brunosutic<enter>\
-<shell-escape>NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/brunosutic.com notmuch new --quiet<enter>\
-<change-folder>!<enter>\
+<shell-escape>(getmail --quiet --getmaildir=$HOME/data/src/private_dotfiles/getmail/ --rcfile=getmailrc-brunosutic; NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/brunosutic.com notmuch new --quiet) &<enter>\
 " "run getmail to sync mail"
 
 macro index  "\
