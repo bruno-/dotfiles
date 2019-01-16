@@ -41,3 +41,8 @@ archive/
 * ^From:.*support@stripe.com
 * ^Subject:.*dispute.*
 archive/
+
+:0:
+* ^From:.*cs@qnomy.com
+* ^Subject:.*New comment.*
+archive/
