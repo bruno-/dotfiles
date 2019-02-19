@@ -13,7 +13,7 @@ set from = "bruno@brunosutic.com"
 my_hdr X-Delay: default
 set sendmail = "/usr/local/bin/msmtp -C $HOME/data/src/private_dotfiles/msmtprc -a bruno-brunosutic.com"
 
-alternates '^(me|contact|hk|github|pbz|njuskalo|natpro|[cd][1-4])@brunosutic.com$'
+alternates '^(me|contact|hk|github|pbz|njuskalo|natpro|algos|d[12])@brunosutic.com$'
 alternates '^(ocbc|bruno)@enliteup.com$'
 
 subscribe @noreply.github.com

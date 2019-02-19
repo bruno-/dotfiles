@@ -27,6 +27,7 @@ set recall = no          # do not ask to use postponed mail
 set editor = 'vim'       # auto format mail when responding
 set print_command = "cat > $HOME/Desktop/email_$(date '+%Y-%m-%dT%H%M%S').txt"
 set print = yes
+set honor_disposition = yes # don't show inline attachments
 
 # Status Bar -----------------------------------------
 set status_chars = " *%A"
