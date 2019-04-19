@@ -8,44 +8,59 @@ SHELL=/bin/sh
 :0fw
 | $HOME/data/bin/mail-date-header
 
+# archive
+
 :0:
-* ^(To|Cc|CC).*(stackoverflow)@brunosutic.com
+* ^X-getmail-retrieved-from-mailbox: (Sent|Archive)
 archive/
 
 :0:
-* ^X-getmail-retrieved-from-mailbox: Sent
+* ^(To|Cc|CC).*(toastmasters|dkim|stackoverflow)@brunosutic.com
 archive/
 
 :0:
-* ^X-getmail-retrieved-from-mailbox: Archive
+* ^Subject.*(View your recent transactions now|Your statement is available|PayWay: Transaction charged at|Stanje na računu Raiffeisen)
 archive/
 
 :0:
-* ^(To|Cc|CC).*(toastmasters|dkim)@brunosutic.com
+* ^(To|Cc|CC).*digitalocean@brunosutic.com
+* ^Subject.*(invoice is available)
 archive/
 
-:0:
-* ^Subject.*(View your recent transactions now|Your Taxify trip)
-archive/
+# /dev/null
 
 :0:
 * ^From.*(Uber Receipts)
 /dev/null/
 
 :0:
-* ^Subject.*(Your Taxify trip on Sunday)
+* ^(To|Cc|CC).*dev_null@brunosutic.com
+/dev/null/
+
+:0:
+* ^Subject.*(Your Bolt trip|Upoznajte vašeg dostavljača)
+/dev/null/
+
+:0:
+* ^To.*(konzum@brunosutic.com)
+* ^Subject.*(Molimo potvrdite prijavu)
+/dev/null/
+
+:0:
+* ^From.*(noreply@hzpp.hr)
+* ^Subject.*(E-karta)
 /dev/null/
 
 # spam
 
 :0:
-* ^(To|Cc|CC).*(contact)@brunosutic.com
+* ^(To|Cc|CC).*(contact)@(brunosutic|enliteup).com
 * ^Reply-To.*.ru>?
 spam/
 
 :0:
 * ^From.*.ru>?
-* ^(To|Cc|CC).*(contact)@brunosutic.com
+* ^(To|Cc|CC).*(contact)@(brunosutic|enliteup).com
 spam/
 
 :0:
