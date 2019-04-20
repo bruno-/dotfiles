@@ -107,7 +107,7 @@ macro index a "<limit>all\n" "show all messages (undo limit)"
 # working with multiple accounts
 mailboxes +bruno-brunosutic.com/inbox \
           +bruno-remotelock.com/inbox \
-          # +bruno.sutic-gmail.com/inbox \
+          +bruno.sutic-gmail.com/inbox \
 
 folder-hook 'bruno-brunosutic.com' 'source ~/data/src/dotfiles/mutt/muttrc'
 folder-hook 'bruno-remotelock.com' 'source ~/data/src/dotfiles/mutt/remotelock'
