@@ -103,7 +103,6 @@ set forward_quote                    # include message in forwards
 set sendmail_wait = 0
 
 macro index a "<limit>all\n" "show all messages (undo limit)"
-# folder-hook . "exec collapse-all"    # collapse all threads
 
 # working with multiple accounts
 mailboxes +bruno-brunosutic.com/inbox \
