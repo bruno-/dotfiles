@@ -112,12 +112,11 @@ folder-hook 'bruno-brunosutic.com' 'source ~/data/src/dotfiles/mutt/muttrc'
 folder-hook 'bruno-remotelock.com' 'source ~/data/src/dotfiles/mutt/remotelock'
 
 # coloring
-color hdrdefault white black          # headers white on black
-color header green  default ^From:
-color header yellow default ^Subject:
-color header brightwhite default ^X-Date:
-# color quoted cyan black               # quoted text in blue
-color signature white black
+color hdrdefault white       default
+color header     green       default ^From:
+color header     yellow      default ^Subject:
+color header     brightwhite default ^X-Date:
+color signature  white       default
 # quote levels
 color quoted  color108 color232
 color quoted1 color116 color232
@@ -131,16 +130,11 @@ color quoted8 color247 color232
 color quoted9 color108 color232
 
 # PGP messages
-color body white        black   "^gpg:.*"
-color body green        default "^gpg: Good signature .*"
-color body brightwhite  red     "^gpg: BAD signature from.*"
-# color body white        black   "^.-- PGP.*"
-# color body white        black   "^.-- The following data is signed --]"
-# color body white        black   "^.-- End of PGP output --]"
-# color body white        black   "^.-- End of signed data --]"
+color body color235    default "^gpg:.*"
+color body green       default "^gpg: Good signature .*"
+color body brightwhite red     "^gpg: BAD signature from.*"
 
 # Encrypting email
-# set crypt_use_gpgme
 source ~/data/src/dotfiles/mutt/gpg.rc
 set pgp_use_gpg_agent = yes
 set pgp_sign_as = 2914ED81
