@@ -12,7 +12,7 @@ unset record # do not record sent email
 # msmtp
 set from = "bruno.sutic@gmail.com"
 unmy_hdr *
-set sendmail = "/usr/local/bin/msmtp -C $HOME/data/src/private_dotfiles/msmtprc -a brunosutic-gmail-com"
+unset sendmail
 
 macro index S "\
 <shell-escape>NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/gmail mutt-notmuch-py ~/data/mail/bruno.sutic-gmail.com/temporary/search<enter>\
@@ -20,5 +20,5 @@ macro index S "\
 " "search mail (using notmuch)"
 
 macro index o "\
-<shell-escape>(getmail --getmaildir=$HOME/data/src/private_dotfiles/getmail/ --rcfile=getmailrc-gmail --quiet; NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/gmail notmuch new --quiet) &<enter>\
-" "run getmail to sync mail"
+<shell-escape>(NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/gmail notmuch new --quiet) &<enter>\
+" "reindex notmuch"
