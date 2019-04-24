@@ -33,7 +33,7 @@ macro index S "\
 " "search mail (using notmuch)"
 
 macro index o "\
-<shell-escape>(lockfile -r0 $HOME/data/mail/bruno-brunosutic.com/temporary/getmail.lock >/dev/null 2>&1 || exit; \
+<shell-escape>(lockfile -r 0 -l 600 -s 0 $HOME/data/mail/bruno-brunosutic.com/temporary/getmail.lock >/dev/null 2>&1 || exit; \
 getmail --quiet --getmaildir=$HOME/data/src/private_dotfiles/getmail/ --rcfile=getmailrc-brunosutic; \
 NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/brunosutic.com notmuch new --quiet; \
 rm -r $HOME/data/mail/bruno-brunosutic.com/temporary/getmail.lock;) & \

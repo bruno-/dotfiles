@@ -35,7 +35,7 @@ macro index S "\
 " "search mail (using notmuch)"
 
 macro index o "\
-<shell-escape>(lockfile -r0 $HOME/data/mail/bruno-remotelock.com/temporary/getmail.lock >/dev/null 2>&1 || exit; \
+<shell-escape>(lockfile -r 0 -l 600 -s 0 $HOME/data/mail/bruno-remotelock.com/temporary/getmail.lock >/dev/null 2>&1 || exit; \
 getmail --getmaildir=$HOME/data/src/private_dotfiles/getmail/ --rcfile=getmailrc-remotelock --quiet; \
 NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/remotelock notmuch new --quiet; \
 rm -r $HOME/data/mail/bruno-remotelock.com/temporary/getmail.lock;) & \
