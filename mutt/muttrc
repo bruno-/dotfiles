@@ -33,8 +33,11 @@ macro index S "\
 " "search mail (using notmuch)"
 
 macro index o "\
-<shell-escape>(getmail --quiet --getmaildir=$HOME/data/src/private_dotfiles/getmail/ --rcfile=getmailrc-brunosutic; NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/brunosutic.com notmuch new --quiet) &<enter>\
-" "run getmail to sync mail"
+<shell-escape>(lockfile -r0 $HOME/data/mail/bruno-brunosutic.com/temporary/getmail.lock >/dev/null 2>&1 || exit; \
+getmail --quiet --getmaildir=$HOME/data/src/private_dotfiles/getmail/ --rcfile=getmailrc-brunosutic; \
+NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/brunosutic.com notmuch new --quiet; \
+rm -r $HOME/data/mail/bruno-brunosutic.com/temporary/getmail.lock;) & \
+<enter>" "run getmail to sync mail"
 
 macro index  "\
 <copy-message>~/data/mail/bruno-brunosutic.com/temporary/search/flag/<enter>\
