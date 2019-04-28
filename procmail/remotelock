@@ -42,7 +42,7 @@ archive/
 archive/
 
 :0:
-* ^Subject:.*(Security alert for your linked Google Account|Security alert|A financing offer from Stripe|Unrecognized device signed in to your Stripe account|Admin login information|Account alert: New login from|Suspected fraudulent payment on your Stripe account|SLA Breach|for Android Available)
+* ^Subject:.*(Security alert for your linked Google Account|Security alert|A financing offer from Stripe|Unrecognized device signed in to your Stripe account|Admin login information|Account alert: New login from|Suspected fraudulent payment on your Stripe account|SLA Breach|for Android Available|You have exceeded your quota)
 archive/
 
 :0:
