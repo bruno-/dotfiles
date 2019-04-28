@@ -25,7 +25,7 @@ fi
 
 # NVM
 source_nvm() {
-  export NVM_DIR="$HOME/.nvm"
+  export NVM_DIR="$HOME/.config"
   [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
 }
 
@@ -40,6 +40,7 @@ export LESS='--RAW-CONTROL-CHARS --LONG-PROMPT --IGNORE-CASE --no-init'
 export LESSHISTFILE="-"
 export GOPATH="$HOME/go"
 export WEECHAT_HOME="$HOME/data/var/weechat"
+export WEECHAT_RUBYZG="$HOME/data/var/weechat_rubyzg"
 export IRBRC="$HOME/data/src/dotfiles/irbrc"
 export PRYRC="$HOME/data/src/dotfiles/pryrc"
 export INPUTRC="$HOME/data/src/dotfiles/inputrc"
