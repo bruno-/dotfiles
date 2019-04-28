@@ -1,8 +1,9 @@
 [ -s "$HOME/data/src/private_dotfiles/secrets" ] && source "$HOME/data/src/private_dotfiles/secrets"
 
 # Bash completion
-if [ -f /usr/local/share/bash-completion/bash_completion ]; then
-  source /usr/local/share/bash-completion/bash_completion 2>/dev/null
+export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+if [ -f /usr/local/etc/profile.d/bash_completion.sh ]; then
+  source /usr/local/etc/profile.d/bash_completion.sh 2>/dev/null
 fi
 
 # Bash prompt
