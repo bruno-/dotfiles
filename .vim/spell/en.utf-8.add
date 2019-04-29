@@ -167,7 +167,7 @@ payoneer
 enliteup
 5000
 Notification
-def
+#ef
 hostname
 ip
 config
@@ -292,3 +292,4 @@ set
 vcr
 weechat
 gmail
+def/!
