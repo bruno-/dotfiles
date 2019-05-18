@@ -27,29 +27,29 @@ archive/
 * ^Subject.*(invoice is available)
 archive/
 
-# /dev/null
+# delete
+
+:0:
+* ^(To|Cc|CC).*devnull@brunosutic.com
+delete/
 
 :0:
 * ^From.*(Uber Receipts)
-/dev/null/
-
-:0:
-* ^(To|Cc|CC).*dev_null@brunosutic.com
-/dev/null/
+delete/
 
 :0:
 * ^Subject.*(Your Bolt trip|Upoznajte vašeg dostavljača)
-/dev/null/
+delete/
 
 :0:
 * ^To.*(konzum@brunosutic.com)
 * ^Subject.*(Molimo potvrdite prijavu)
-/dev/null/
+delete/
 
 :0:
 * ^From.*(noreply@hzpp.hr)
 * ^Subject.*(E-karta)
-/dev/null/
+delete/
 
 # spam
 

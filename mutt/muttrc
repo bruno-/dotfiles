@@ -14,7 +14,7 @@ my_hdr X-Delay: default
 set sendmail = "/usr/local/bin/msmtp -C $HOME/data/src/private_dotfiles/msmtprc -a bruno-brunosutic.com"
 
 alternates '^(me|contact|hk|github|pbz|njuskalo|natpro|algos|d[12])@brunosutic.com$'
-alternates '^(ocbc|bruno)@enliteup.com$'
+alternates '^(ocbc|bruno|infob|interactivebrokers.com)@enliteup.com$'
 
 subscribe @noreply.github.com
 subscribe tmux-users@googlegroups.com
