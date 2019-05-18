@@ -1,9 +1,8 @@
-confirmation=off
+confirmation=no
+recurrence.confirmation=no
 data.location=~/data/var/task
 weekstart=Monday
-# detection=off
-# defaultwidth=80
-# defaultheight=0
+nag=""
 
 # report.next.filter=project: +READY
 alias.n=project: +READY -work
