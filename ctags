@@ -1,5 +1,6 @@
 --regex-ruby=/^[ \t]*alias_method[ \t]+:([^, \t]+)/\1/m,method/
 --regex-ruby=/^[ \t]*alias[ \t]+:?([^ \t]+)/\1/m,method/
+--regex-ruby=/^[ \t]*attr_(accessor|reader|writer)[ \t]+:?([^, \t]+)/\2/m,method/
 --regex-ruby=/^[ \t]*concern[ \t]+:?([^ \t]+)/\1/c,class/
 --regex-ruby=/^[ \t]*(scope|has_many|has_one|belongs_to|define_method)[ \t]+:?([^, \t]+)/\2/m,method/
 --regex-ruby=/^[ \t]*([A-Z][A-Za-z_]*)[ \t]*=/\1/c,class/
