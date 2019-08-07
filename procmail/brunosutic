@@ -15,11 +15,15 @@ SHELL=/bin/sh
 archive/
 
 :0:
-* ^(To|Cc|CC).*(toastmasters|dkim|stackoverflow)@brunosutic.com
+* ^From.*(payway@t-com.hr)
 archive/
 
 :0:
-* ^Subject.*(View your recent transactions now|Your statement is available|PayWay: Transaction charged at|Stanje na računu Raiffeisen)
+* ^(To|Cc|CC).*(toastmasters|dkim|stackoverflow|rmf)@brunosutic.com
+archive/
+
+:0:
+* ^Subject.*(View your recent transactions now|Your statement is available|PayWay: Transaction charged at|Stanje na računu Raiffeisen|Your Bolt trip|Event Notification: Account Login)
 archive/
 
 :0:
@@ -38,7 +42,7 @@ delete/
 delete/
 
 :0:
-* ^Subject.*(Your Bolt trip|Upoznajte vašeg dostavljača)
+* ^Subject.*(Upoznajte vašeg dostavljača)
 delete/
 
 :0:
@@ -54,13 +58,13 @@ delete/
 # spam
 
 :0:
-* ^(To|Cc|CC).*(contact)@(brunosutic|enliteup).com
+* ^(To|Cc|CC).*(contact)@brunosutic.com
 * ^Reply-To.*.ru>?
 spam/
 
 :0:
 * ^From.*.ru>?
-* ^(To|Cc|CC).*(contact)@(brunosutic|enliteup).com
+* ^(To|Cc|CC).*(contact)@brunosutic.com
 spam/
 
 :0:

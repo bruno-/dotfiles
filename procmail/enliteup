@@ -1,0 +1,35 @@
+# routes incoming mail to appropriate mailboxes
+PATH=/usr/bin:/usr/local/bin
+MAILDIR=$HOME/data/mail/bruno-enliteup.com/
+DEFAULT=$HOME/data/mail/bruno-enliteup.com/inbox/
+LOGFILE=/dev/null
+SHELL=/bin/sh
+
+:0fw
+| $HOME/data/bin/mail-date-header
+
+:0:
+* ^X-getmail-retrieved-from-mailbox: Sent
+archive/
+
+# archive
+
+:0:
+* ^Subject.*(Event Notification: Account Login)
+archive/
+
+# spam
+
+:0:
+* ^(To|Cc|CC).*(contact)@enliteup.com
+* ^Reply-To.*.ru>?
+spam/
+
+:0:
+* ^From.*.ru>?
+* ^(To|Cc|CC).*(contact)@enliteup.com
+spam/
+
+:0:
+* ^To.*.ru>
+spam/

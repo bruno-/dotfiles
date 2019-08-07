@@ -34,7 +34,7 @@ archive/
 # archive
 
 :0:
-* ^From:.*(automated@airbnb.com|noreply@aylanetworks.com|support@eleviomail.com|support@tinyboards.co|no-reply@zoom.us|renewals@godaddy.com|Google Play)
+* ^From:.*(automated@airbnb.com|noreply@aylanetworks.com|support@eleviomail.com|support@tinyboards.co|no-reply@zoom.us|renewals@godaddy.com|Google Play|newtektechnologyservices.com|cameron.folan@zoom.us)
 archive/
 
 :0:
@@ -42,7 +42,7 @@ archive/
 archive/
 
 :0:
-* ^Subject:.*(Security alert for your linked Google Account|Security alert|A financing offer from Stripe|Unrecognized device signed in to your Stripe account|Admin login information|Account alert: New login from|Suspected fraudulent payment on your Stripe account|SLA Breach|for (Android|iOS) Available|You have exceeded your quota)
+* ^Subject:.*(Security alert for your linked Google Account|Security alert|A financing offer from Stripe|Unrecognized device signed in to your Stripe account|Admin login information|Account alert: New login from|Suspected fraudulent payment on your Stripe account|SLA Breach|for (Android|iOS) Available|You have exceeded your quota|Skylight Invoice for)
 archive/
 
 :0:

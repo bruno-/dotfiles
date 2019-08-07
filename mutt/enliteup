@@ -1,0 +1,44 @@
+# vi: ft=muttrc
+source ~/data/src/dotfiles/mutt/config
+
+color status black color33
+
+# Default inbox.
+set spoolfile = "+bruno-enliteup.com/inbox"
+set mbox      = "+bruno-enliteup.com/archive"
+set postponed = "+bruno-enliteup.com/postponed"
+set record=! # leave sent email in inbox
+
+# msmtp
+set from = "bruno@enliteup.com"
+my_hdr X-Delay: default
+set sendmail = "/usr/local/bin/msmtp -C $HOME/data/src/private_dotfiles/msmtprc -a bruno-enliteup.com"
+
+alternates '^(contact|ocbc|infob|interactivebrokers.com)@enliteup.com$'
+
+set index_format = " %Z | %X | %D | %-30.30F  %-30.30L  %2M  %s"
+
+# unbind command set by macro
+bind index F flag-message
+
+macro pager T "<pipe-entry>create_email_task<enter>" "Create a task"
+
+macro index S "\
+<shell-escape>NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/enliteup mutt-notmuch-py ~/data/mail/bruno-enliteup.com/temporary/search<enter>\
+<change-folder-readonly>+bruno-enliteup.com/temporary/search<enter>\
+<enter-command>macro index F <enter>\
+" "search mail (using notmuch)"
+
+macro index o "\
+<shell-escape>(lockfile -r 0 -l 600 -s 0 $HOME/data/mail/bruno-enliteup.com/temporary/getmail.lock >/dev/null 2>&1 || exit; \
+getmail --getmaildir=$HOME/data/src/private_dotfiles/getmail/ --rcfile=getmailrc-enliteup --quiet; \
+NOTMUCH_CONFIG=~/data/src/dotfiles/notmuch/enliteup notmuch new --quiet; \
+rm -r $HOME/data/mail/bruno-enliteup.com/temporary/getmail.lock;) & \
+<enter>" "run getmail to sync mail"
+
+macro index  "\
+<copy-message>~/data/mail/bruno-enliteup.com/temporary/search/flag/<enter>\
+<shell-escape>toggle-message-flag ~/data/mail/bruno-enliteup.com/temporary/search<enter>\
+<collapse-all>\
+<collapse-thread>\
+" "toggle message flag"
