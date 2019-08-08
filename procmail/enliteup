@@ -9,7 +9,7 @@ SHELL=/bin/sh
 | $HOME/data/bin/mail-date-header
 
 :0:
-* ^X-getmail-retrieved-from-mailbox: Sent
+* ^X-getmail-retrieved-from-mailbox: (Sent|Trash|Archive)
 archive/
 
 # archive

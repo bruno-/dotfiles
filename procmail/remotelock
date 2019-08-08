@@ -9,16 +9,12 @@ SHELL=/bin/sh
 | $HOME/data/bin/mail-date-header
 
 :0:
-* ^X-getmail-retrieved-from-mailbox: \[Gmail\]/Sent Mail
+* ^X-getmail-retrieved-from-mailbox: (\[Gmail\]/Sent Mail|Trash|Mail Archive)
 archive/
 
 :0:
 * ^X-getmail-retrieved-from-mailbox: \[Gmail\]/All Mail
 /dev/null
-
-:0:
-* ^X-getmail-retrieved-from-mailbox: Mail Archive
-archive/
 
 # /dev/null
 

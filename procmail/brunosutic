@@ -11,7 +11,7 @@ SHELL=/bin/sh
 # archive
 
 :0:
-* ^X-getmail-retrieved-from-mailbox: (Sent|Archive)
+* ^X-getmail-retrieved-from-mailbox: (Sent|Trash|Archive)
 archive/
 
 :0:
@@ -59,14 +59,14 @@ delete/
 
 :0:
 * ^(To|Cc|CC).*(contact)@brunosutic.com
-* ^Reply-To.*.ru>?
+* ^Reply-To.*\.ru>
 spam/
 
 :0:
-* ^From.*.ru>?
+* ^From.*\.ru>
 * ^(To|Cc|CC).*(contact)@brunosutic.com
 spam/
 
 :0:
-* ^To.*.ru>
+* ^To.*\.ru>
 spam/
