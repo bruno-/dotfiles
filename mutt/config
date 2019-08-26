@@ -2,11 +2,11 @@
 # Paths ----------------------------------------------
 set folder           = ~/data/mail                            # mailbox location
 set alias_file       = ~/data/src/dotfiles/mutt/alias         # where to store aliases
-set header_cache     = ~/data/src/dotfiles/mutt/cache/headers # where to store headers
-set message_cachedir = ~/data/src/dotfiles/mutt/cache/bodies  # where to store bodies
+set header_cache     = /tmp/mutt_cache/headers                # where to store headers
+set message_cachedir = /tmp/mutt_cache/bodies                 # where to store bodies
 set certificate_file = ~/data/src/dotfiles/mutt/certificates  # where to store certs
 set mailcap_path     = ~/data/src/dotfiles/mutt/mailcap       # entries for filetypes
-set tmpdir           = ~/data/src/dotfiles/mutt/temp          # where to keep temp files
+set tmpdir           = /tmp/mutt_tmpdir                       # where to keep temp files
 set signature        = ~/data/src/dotfiles/mutt/sig           # my signature file
 
 # Basic Options --------------------------------------
