@@ -18,6 +18,12 @@ archive/
 * ^Subject.*(Event Notification: Account Login)
 archive/
 
+# delete
+
+:0:
+* ^(To|Cc|CC).*devnull@enliteup.com
+delete/
+
 # spam
 
 :0:
