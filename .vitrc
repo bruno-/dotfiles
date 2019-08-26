@@ -1,6 +1,7 @@
 map t=:!r task 
 map a=:!r task add +next 
 map T=:!r task %TASKID 
+map m=:!r task %TASKID mod 
 map d=:!r task %TASKID done<Return>
 map D=:!r task %TASKID delete<Return>
 map s=:!r task %TASKID start<Return>
